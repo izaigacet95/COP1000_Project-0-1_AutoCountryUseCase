@@ -1,16 +1,17 @@
 # List of authorized vehicles
-AllowedVehiclesList = ["Ford F-150", "Chevrolet Silverado", "Tesla CyberTruck", "Toyota Tundra", "Nissan Titan"]
+AllowedVehiclesList = ["Ford F-150", "Chevrolet Silverado", "Tesla CyberTruck", "Toyota Tundra", "Nissan Titan", "Rivian R1T", "Ram 1500"]
 
 # Function to display menu
 def display_menu():
     print("********************************")
-    print("AutoCountry Vehicle Finder v0.3")
+    print("AutoCountry Vehicle Finder v0.4")
     print("********************************")
     print("Please Enter the following number below from the following menu:")
     print("1. PRINT all Authorized Vehicles")
     print("2. SEARCH for Authorized Vehicle")
     print("3. ADD Authorized Vehicle")
-    print("4. Exit")
+    print("4. DELETE Authorized Vehicle")
+    print("5. Exit")
     print("********************************")
 
 # Function to print all allowed vehicles
@@ -30,15 +31,30 @@ def search_vehicle():
         print(f"\n{vehicle_name} is not an authorized vehicle, if you received this in error please check the spelling and try again")
     print("********************************")
 
-# Function to add a new authorized vehicle
+# Function to add a new vehicle to the list
 def add_vehicle():
     print("********************************")
-    new_vehicle = input("Please Enter the full Vehicle name you would like to add: ").strip()
-    if new_vehicle not in AllowedVehiclesList:
-        AllowedVehiclesList.append(new_vehicle)
-        print(f'\nYou have added "{new_vehicle}" as an authorized vehicle')
+    vehicle_name = input("Please Enter the full Vehicle name you would like to add: ").strip()
+    if vehicle_name not in AllowedVehiclesList:
+        AllowedVehiclesList.append(vehicle_name)
+        print(f'You have added "{vehicle_name}" as an authorized vehicle')
     else:
-        print(f'\n"{new_vehicle}" is already in the list of authorized vehicles')
+        print(f'"{vehicle_name}" is already in the list of authorized vehicles')
+    print("********************************")
+
+# Function to delete a vehicle from the list
+def delete_vehicle():
+    print("********************************")
+    vehicle_name = input("Please Enter the full Vehicle name you would like to REMOVE: ").strip()
+    if vehicle_name in AllowedVehiclesList:
+        confirmation = input(f'Are you sure you want to remove "{vehicle_name}" from the Authorized Vehicles List? (yes/no): ').strip().lower()
+        if confirmation == "yes":
+            AllowedVehiclesList.remove(vehicle_name)
+            print(f'You have REMOVED "{vehicle_name}" as an authorized vehicle')
+        else:
+            print("Vehicle removal canceled.")
+    else:
+        print(f'"{vehicle_name}" is not found in the list of authorized vehicles')
     print("********************************")
 
 # Main program loop
@@ -53,6 +69,8 @@ while True:
     elif choice == "3":
         add_vehicle()
     elif choice == "4":
+        delete_vehicle()
+    elif choice == "5":
         print("\nThank you for using the AutoCountry Vehicle Finder, good-bye!")
         print("********************************")
         break
